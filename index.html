@@ -15,6 +15,8 @@
       --white:  #ffffff;
       --grey:   #8a9bb0;
       --border: rgba(0,64,128,.13);
+      --green:  #1a7a45;
+      --red:    #b91c1c;
     }
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -140,11 +142,7 @@
       margin-top: 10px;
       border-radius: 2px;
     }
-    .section-header p {
-      color: var(--grey);
-      margin-top: 10px;
-      font-size: .95rem;
-    }
+    .section-header p { color: var(--grey); margin-top: 10px; font-size: .95rem; }
 
     /* ── DOCTORS GRID ── */
     .doctors-grid {
@@ -155,14 +153,12 @@
       max-width: 1200px;
       margin: 0 auto;
     }
-
     .doctor-card {
       background: var(--white);
       border-radius: 16px;
       overflow: hidden;
       border: 1px solid var(--border);
       transition: transform .25s, box-shadow .25s;
-      cursor: pointer;
       position: relative;
     }
     .doctor-card:hover {
@@ -173,148 +169,96 @@
       background: linear-gradient(135deg, var(--blue), #003060);
       padding: 32px 24px 24px;
       text-align: center;
-      position: relative;
     }
     .doctor-avatar {
-      width: 80px;
-      height: 80px;
+      width: 80px; height: 80px;
       border-radius: 50%;
       background: rgba(255,255,255,.15);
       border: 3px solid var(--gold);
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      display: flex; align-items: center; justify-content: center;
       margin: 0 auto 14px;
       font-size: 2rem;
     }
     .doctor-card-top h3 {
       font-family: 'Cormorant Garamond', serif;
-      font-size: 1.35rem;
-      font-weight: 600;
-      color: var(--white);
+      font-size: 1.35rem; font-weight: 600; color: var(--white);
     }
     .doctor-card-top .specialty {
-      font-size: .8rem;
-      color: var(--gold);
-      text-transform: uppercase;
-      letter-spacing: .08em;
-      margin-top: 4px;
-      font-weight: 500;
+      font-size: .8rem; color: var(--gold);
+      text-transform: uppercase; letter-spacing: .08em;
+      margin-top: 4px; font-weight: 500;
     }
-    .doctor-card-body {
-      padding: 20px 24px;
-    }
+    .doctor-card-body { padding: 20px 24px; }
     .doctor-info-row {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      font-size: .88rem;
-      color: var(--grey);
-      margin-bottom: 8px;
+      display: flex; align-items: center; gap: 10px;
+      font-size: .88rem; color: var(--grey); margin-bottom: 8px;
     }
-    .doctor-info-row .icon { font-size: 1rem; }
     .availability-badge {
-      display: inline-block;
-      margin-top: 4px;
-      padding: 3px 12px;
-      border-radius: 100px;
-      font-size: .78rem;
-      font-weight: 500;
+      display: inline-block; margin-top: 4px;
+      padding: 3px 12px; border-radius: 100px;
+      font-size: .78rem; font-weight: 500;
     }
     .avail-yes { background: #e6f7ee; color: #1a7a45; }
     .avail-no  { background: #fde8e8; color: #b91c1c; }
     .btn-rdv {
-      display: block;
-      width: 100%;
-      margin-top: 16px;
-      padding: 11px;
-      background: var(--blue);
-      color: var(--white);
-      border: none;
-      border-radius: 10px;
-      font-family: 'DM Sans', sans-serif;
-      font-size: .9rem;
-      font-weight: 500;
-      cursor: pointer;
-      transition: background .2s;
-      letter-spacing: .02em;
+      display: block; width: 100%; margin-top: 16px; padding: 11px;
+      background: var(--blue); color: var(--white); border: none;
+      border-radius: 10px; font-family: 'DM Sans', sans-serif;
+      font-size: .9rem; font-weight: 500; cursor: pointer;
+      transition: background .2s; letter-spacing: .02em;
     }
     .btn-rdv:hover { background: #005cad; }
 
     /* ── PAGE RDV ── */
-    .rdv-wrapper {
-      max-width: 680px;
-      margin: 0 auto;
-      padding: 48px 40px 80px;
-    }
+    .rdv-wrapper { max-width: 680px; margin: 0 auto; padding: 48px 40px 80px; }
     .rdv-card {
-      background: var(--white);
-      border-radius: 20px;
-      border: 1px solid var(--border);
-      padding: 40px;
+      background: var(--white); border-radius: 20px;
+      border: 1px solid var(--border); padding: 40px;
       box-shadow: 0 8px 32px rgba(0,64,128,.07);
     }
     .rdv-card h2 {
       font-family: 'Cormorant Garamond', serif;
-      font-size: 1.9rem;
-      font-weight: 400;
-      margin-bottom: 6px;
+      font-size: 1.9rem; font-weight: 400; margin-bottom: 6px;
     }
-    .rdv-card .subtitle {
-      color: var(--grey);
-      font-size: .9rem;
-      margin-bottom: 32px;
-    }
+    .rdv-card .subtitle { color: var(--grey); font-size: .9rem; margin-bottom: 32px; }
 
-    /* Selected doctor banner */
     #selected-doctor-banner {
-      display: none;
-      align-items: center;
-      gap: 14px;
+      display: none; align-items: center; gap: 14px;
       background: linear-gradient(90deg, #eef4ff, #f4f7fc);
       border: 1px solid rgba(0,115,230,.2);
-      border-radius: 12px;
-      padding: 14px 18px;
-      margin-bottom: 28px;
+      border-radius: 12px; padding: 14px 18px; margin-bottom: 28px;
     }
     #selected-doctor-banner.visible { display: flex; }
     .banner-avatar {
-      width: 44px;
-      height: 44px;
-      border-radius: 50%;
-      background: var(--blue);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.2rem;
-      flex-shrink: 0;
+      width: 44px; height: 44px; border-radius: 50%;
+      background: var(--blue); display: flex; align-items: center;
+      justify-content: center; font-size: 1.2rem; flex-shrink: 0;
     }
     .banner-info .name { font-weight: 500; font-size: .95rem; color: var(--navy); }
     .banner-info .spec { font-size: .8rem; color: var(--grey); }
 
-    /* Form */
-    .form-group {
-      margin-bottom: 22px;
-    }
+    /* ── Form ── */
+    .form-group { margin-bottom: 22px; }
     label {
-      display: block;
-      font-size: .82rem;
-      font-weight: 500;
-      letter-spacing: .05em;
-      text-transform: uppercase;
-      color: var(--navy);
-      margin-bottom: 8px;
+      display: block; font-size: .82rem; font-weight: 500;
+      letter-spacing: .05em; text-transform: uppercase;
+      color: var(--navy); margin-bottom: 8px;
     }
+
+    /* Input avec icône de statut à droite */
+    .input-wrapper { position: relative; display: flex; align-items: center; }
+    .input-wrapper input { padding-right: 44px; }
+    .input-status-icon {
+      position: absolute; right: 14px; font-size: 1.1rem;
+      pointer-events: none;
+    }
+
     input, select, textarea {
-      width: 100%;
-      padding: 12px 16px;
-      border: 1.5px solid var(--border);
-      border-radius: 10px;
-      font-family: 'DM Sans', sans-serif;
-      font-size: .95rem;
-      color: var(--navy);
-      background: var(--light);
-      transition: border-color .2s, box-shadow .2s;
+      width: 100%; padding: 12px 16px;
+      border: 1.5px solid var(--border); border-radius: 10px;
+      font-family: 'DM Sans', sans-serif; font-size: .95rem;
+      color: var(--navy); background: var(--light);
+      transition: border-color .2s, box-shadow .2s, background .2s;
       outline: none;
     }
     input:focus, select:focus, textarea:focus {
@@ -322,90 +266,79 @@
       box-shadow: 0 0 0 3px rgba(0,115,230,.1);
       background: var(--white);
     }
-    textarea { resize: vertical; min-height: 100px; }
 
+    /* États du champ discord */
+    input.discord-ok      { border-color: var(--green) !important; background: #f0faf4 !important; }
+    input.discord-ko      { border-color: var(--red)   !important; background: #fff5f5 !important; }
+    input.discord-loading { border-color: var(--gold)  !important; }
+
+    textarea { resize: vertical; min-height: 100px; }
     .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
 
-    .btn-submit {
-      width: 100%;
-      padding: 14px;
-      background: linear-gradient(135deg, var(--blue), var(--accent));
-      color: var(--white);
-      border: none;
-      border-radius: 12px;
-      font-family: 'DM Sans', sans-serif;
-      font-size: 1rem;
-      font-weight: 500;
-      cursor: pointer;
-      margin-top: 8px;
-      transition: opacity .2s, transform .15s;
-      letter-spacing: .02em;
+    /* Message statut sous le champ Discord */
+    .discord-feedback {
+      margin-top: 7px; font-size: .82rem; font-weight: 500;
+      min-height: 20px; display: flex; align-items: center; gap: 7px;
     }
-    .btn-submit:hover { opacity: .92; transform: translateY(-1px); }
-    .btn-submit:disabled { opacity: .6; cursor: not-allowed; transform: none; }
+    .discord-feedback.ok      { color: var(--green); }
+    .discord-feedback.ko      { color: var(--red); }
+    .discord-feedback.loading { color: #a07830; }
+
+    /* Spinner */
+    .spinner {
+      width: 13px; height: 13px; flex-shrink: 0;
+      border: 2px solid rgba(160,120,48,.25);
+      border-top-color: var(--gold);
+      border-radius: 50%;
+      animation: spin .65s linear infinite;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    .btn-submit {
+      width: 100%; padding: 14px;
+      background: linear-gradient(135deg, var(--blue), var(--accent));
+      color: var(--white); border: none; border-radius: 12px;
+      font-family: 'DM Sans', sans-serif; font-size: 1rem; font-weight: 500;
+      cursor: pointer; margin-top: 8px;
+      transition: opacity .2s, transform .15s; letter-spacing: .02em;
+    }
+    .btn-submit:hover:not(:disabled) { opacity: .92; transform: translateY(-1px); }
+    .btn-submit:disabled { opacity: .45; cursor: not-allowed; transform: none; }
 
     /* ── TOAST ── */
     #toast {
-      position: fixed;
-      bottom: 28px;
-      right: 28px;
-      padding: 14px 22px;
-      border-radius: 12px;
-      font-size: .9rem;
-      font-weight: 500;
-      color: var(--white);
+      position: fixed; bottom: 28px; right: 28px;
+      padding: 14px 22px; border-radius: 12px;
+      font-size: .9rem; font-weight: 500; color: var(--white);
       box-shadow: 0 8px 24px rgba(0,0,0,.18);
-      transform: translateY(80px);
-      opacity: 0;
+      transform: translateY(80px); opacity: 0;
       transition: all .35s cubic-bezier(.4,0,.2,1);
-      z-index: 999;
-      pointer-events: none;
-      max-width: 340px;
+      z-index: 999; pointer-events: none; max-width: 340px;
     }
     #toast.show { transform: translateY(0); opacity: 1; }
     #toast.success { background: #1a7a45; }
     #toast.error   { background: #b91c1c; }
 
-    /* ── SUCCESS STATE ── */
-    .success-screen {
-      text-align: center;
-      padding: 24px 0;
-    }
+    /* ── SUCCESS ── */
+    .success-screen { text-align: center; padding: 24px 0; }
     .success-icon {
-      width: 72px;
-      height: 72px;
-      background: #e6f7ee;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 2rem;
-      margin: 0 auto 20px;
+      width: 72px; height: 72px; background: #e6f7ee; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 2rem; margin: 0 auto 20px;
     }
     .success-screen h3 {
       font-family: 'Cormorant Garamond', serif;
-      font-size: 1.8rem;
-      font-weight: 400;
-      color: var(--navy);
-      margin-bottom: 10px;
+      font-size: 1.8rem; font-weight: 400; color: var(--navy); margin-bottom: 10px;
     }
     .success-screen p { color: var(--grey); line-height: 1.7; }
     .btn-back {
-      display: inline-block;
-      margin-top: 24px;
-      padding: 11px 28px;
-      background: var(--navy);
-      color: var(--white);
-      border: none;
-      border-radius: 10px;
-      font-family: 'DM Sans', sans-serif;
-      font-size: .9rem;
-      cursor: pointer;
-      transition: background .2s;
+      display: inline-block; margin-top: 24px; padding: 11px 28px;
+      background: var(--navy); color: var(--white); border: none;
+      border-radius: 10px; font-family: 'DM Sans', sans-serif;
+      font-size: .9rem; cursor: pointer; transition: background .2s;
     }
     .btn-back:hover { background: var(--blue); }
 
-    /* ── RESPONSIVE ── */
     @media(max-width: 600px) {
       .doctors-grid { padding: 0 16px 48px; }
       .section-header { padding: 40px 16px 24px; }
@@ -419,7 +352,6 @@
 </head>
 <body>
 
-<!-- HEADER -->
 <header>
   <div class="logo">CHL <span>·</span> Centre Hospitalier de Liège</div>
   <nav>
@@ -435,15 +367,11 @@
     <h1 style="margin-top:20px">Notre équipe <em>médicale</em><br>à votre service</h1>
     <p>Prenez rendez-vous en ligne avec l'un de nos spécialistes.<br>Un ticket Discord vous sera créé automatiquement.</p>
   </div>
-
   <div class="section-header">
     <h2>Nos médecins</h2>
     <p>Cliquez sur un médecin pour prendre rendez-vous directement avec lui.</p>
   </div>
-
-  <div class="doctors-grid" id="doctors-grid">
-    <!-- Généré par JS -->
-  </div>
+  <div class="doctors-grid" id="doctors-grid"></div>
 </div>
 
 <!-- ═══ PAGE RDV ═══ -->
@@ -470,25 +398,38 @@
           </select>
         </div>
 
+        <!-- ── Champ Discord + vérification temps réel ── -->
+        <div class="form-group">
+          <label>Votre pseudo Discord</label>
+          <div class="input-wrapper">
+            <input
+              type="text"
+              id="input-discord"
+              placeholder="ex: jean.dupont"
+              autocomplete="off"
+              spellcheck="false"
+              required
+            />
+            <span class="input-status-icon" id="discord-icon"></span>
+          </div>
+          <!-- Message retour sous le champ -->
+          <div class="discord-feedback" id="discord-feedback"></div>
+        </div>
+
+        <div class="form-group">
+          <label>Votre prénom (RP)</label>
+          <input type="text" id="input-prenom" placeholder="ex: Jean" required />
+        </div>
+
         <div class="form-row">
           <div class="form-group">
-            <label>Votre pseudo Discord</label>
-            <input type="text" id="input-discord" placeholder="ex: jean.dupont" required />
+            <label>Date souhaitée</label>
+            <input type="date" id="input-date" required />
           </div>
           <div class="form-group">
-            <label>Votre prénom</label>
-            <input type="text" id="input-prenom" placeholder="ex: Jean" required />
+            <label>Heure souhaitée</label>
+            <input type="time" id="input-heure" required />
           </div>
-        </div>
-
-        <div class="form-group">
-          <label>Date souhaitée</label>
-          <input type="date" id="input-date" required />
-        </div>
-
-        <div class="form-group">
-          <label>Heure souhaitée</label>
-          <input type="time" id="input-heure" required />
         </div>
 
         <div class="form-group">
@@ -496,23 +437,23 @@
           <textarea id="input-motif" placeholder="Décrivez brièvement la raison de votre consultation..." required></textarea>
         </div>
 
-        <button type="submit" class="btn-submit" id="btn-submit">📅 Confirmer la demande</button>
+        <button type="submit" class="btn-submit" id="btn-submit" disabled>
+          📅 Confirmer la demande
+        </button>
+
       </form>
     </div>
   </div>
 </div>
 
-<!-- TOAST -->
 <div id="toast"></div>
 
 <script>
 // ══════════════════════════════════════════════
-//  CONFIG — API & MÉDECINS
+//  CONFIG
 // ══════════════════════════════════════════════
-const API_BASE = "https://chl-bot-gestion-7tff.onrender.com"; // ← Remplacez par votre URL Render
+const API_BASE = "https://chl-bot-gestion-7tff.onrender.com";
 
-// Liste des médecins — modifiez ici pour en ajouter / supprimer
-// discordId : l'ID Discord du médecin (pour les permissions du ticket)
 const DOCTORS = [
   {
     id: "doctor_1",
@@ -522,7 +463,7 @@ const DOCTORS = [
     disponible: true,
     langues: "Français, Anglais",
     experience: "12 ans",
-    discordId: "771440807919878164", // ← Remplacez par l'ID Discord réel
+    discordId: "771440807919878164",
   },
   {
     id: "doctor_2",
@@ -567,14 +508,13 @@ function showPage(name, btn) {
 }
 
 // ══════════════════════════════════════════════
-//  RENDU GRILLE MÉDECINS
+//  GRILLE MÉDECINS
 // ══════════════════════════════════════════════
 function renderDoctors() {
-  const grid = document.getElementById('doctors-grid');
+  const grid   = document.getElementById('doctors-grid');
   const select = document.getElementById('select-doctor');
 
   DOCTORS.forEach(doc => {
-    // Card
     const card = document.createElement('div');
     card.className = 'doctor-card';
     card.innerHTML = `
@@ -584,19 +524,19 @@ function renderDoctors() {
         <div class="specialty">${doc.specialty}</div>
       </div>
       <div class="doctor-card-body">
-        <div class="doctor-info-row"><span class="icon">🌐</span> ${doc.langues}</div>
-        <div class="doctor-info-row"><span class="icon">📅</span> Expérience : ${doc.experience}</div>
+        <div class="doctor-info-row"><span>🌐</span> ${doc.langues}</div>
+        <div class="doctor-info-row"><span>📅</span> Expérience : ${doc.experience}</div>
         <span class="availability-badge ${doc.disponible ? 'avail-yes' : 'avail-no'}">
           ${doc.disponible ? '✅ Disponible' : '❌ Indisponible'}
         </span>
-        <button class="btn-rdv" onclick="selectDoctor('${doc.id}')" ${!doc.disponible ? 'disabled style="opacity:.5;cursor:not-allowed"' : ''}>
+        <button class="btn-rdv" onclick="selectDoctor('${doc.id}')"
+          ${!doc.disponible ? 'disabled style="opacity:.5;cursor:not-allowed"' : ''}>
           📅 Prendre rendez-vous
         </button>
       </div>
     `;
     grid.appendChild(card);
 
-    // Option dans le select
     const opt = document.createElement('option');
     opt.value = doc.id;
     opt.textContent = `${doc.emoji} ${doc.name} — ${doc.specialty}`;
@@ -605,9 +545,6 @@ function renderDoctors() {
   });
 }
 
-// ══════════════════════════════════════════════
-//  SÉLECTIONNER UN MÉDECIN + BASCULER PAGE
-// ══════════════════════════════════════════════
 function selectDoctor(id) {
   document.getElementById('select-doctor').value = id;
   updateBanner();
@@ -629,26 +566,115 @@ function updateBanner() {
 }
 
 // ══════════════════════════════════════════════
-//  SOUMISSION FORMULAIRE
+//  VÉRIFICATION DISCORD EN TEMPS RÉEL
+// ══════════════════════════════════════════════
+let discordVerified   = false;
+let discordCheckTimer = null;
+
+const inputDiscord   = document.getElementById('input-discord');
+const discordFeedback = document.getElementById('discord-feedback');
+const discordIcon    = document.getElementById('discord-icon');
+const btnSubmit      = document.getElementById('btn-submit');
+
+/**
+ * Met à jour l'apparence du champ et le message de retour.
+ * @param {'idle'|'loading'|'ok'|'ko'} state
+ * @param {string} message
+ */
+function setDiscordState(state, message = '') {
+  // Reset classes
+  inputDiscord.classList.remove('discord-ok', 'discord-ko', 'discord-loading');
+  discordFeedback.className = 'discord-feedback';
+  discordFeedback.innerHTML = '';
+  discordIcon.textContent   = '';
+  discordVerified = false;
+
+  switch (state) {
+    case 'loading':
+      inputDiscord.classList.add('discord-loading');
+      discordFeedback.classList.add('loading');
+      discordFeedback.innerHTML = '<div class="spinner"></div> Vérification sur le serveur Discord…';
+      break;
+
+    case 'ok':
+      inputDiscord.classList.add('discord-ok');
+      discordFeedback.classList.add('ok');
+      discordFeedback.innerHTML = `✅ ${message}`;
+      discordIcon.textContent   = '✅';
+      discordVerified = true;
+      break;
+
+    case 'ko':
+      inputDiscord.classList.add('discord-ko');
+      discordFeedback.classList.add('ko');
+      discordFeedback.innerHTML = `❌ ${message}`;
+      discordIcon.textContent   = '❌';
+      break;
+
+    default: // idle — champ vide ou trop court
+      break;
+  }
+
+  // Le bouton soumettre n'est actif que si le discord est vérifié
+  btnSubmit.disabled = !discordVerified;
+}
+
+async function checkDiscord(username) {
+  try {
+    const res  = await fetch(`${API_BASE}/api/check-discord?username=${encodeURIComponent(username)}`);
+    const data = await res.json();
+
+    if (data.found) {
+      setDiscordState('ok', `Membre trouvé sur le serveur Discord du CHL ✓`);
+    } else {
+      setDiscordState('ko', `Pseudo introuvable sur le serveur — vérifiez l'orthographe exacte (sensible à la casse)`);
+    }
+  } catch (_) {
+    setDiscordState('ko', `Impossible de joindre le serveur de vérification — réessayez`);
+  }
+}
+
+// Debounce 650ms : on attend que l'utilisateur arrête de taper
+inputDiscord.addEventListener('input', () => {
+  clearTimeout(discordCheckTimer);
+  const val = inputDiscord.value.trim();
+
+  if (val.length < 2) {
+    setDiscordState('idle');
+    return;
+  }
+
+  // Afficher "chargement" immédiatement, lancer la requête après le délai
+  setDiscordState('loading');
+  discordCheckTimer = setTimeout(() => checkDiscord(val), 650);
+});
+
+// ══════════════════════════════════════════════
+//  SOUMISSION
 // ══════════════════════════════════════════════
 async function submitRdv(e) {
   e.preventDefault();
 
+  if (!discordVerified) {
+    showToast('❌ Pseudo Discord non vérifié — attendez la confirmation.', 'error');
+    return;
+  }
+
   const docId   = document.getElementById('select-doctor').value;
   const doctor  = DOCTORS.find(d => d.id === docId);
-  const discord = document.getElementById('input-discord').value.trim();
+  const discord = inputDiscord.value.trim();
   const prenom  = document.getElementById('input-prenom').value.trim();
   const date    = document.getElementById('input-date').value;
   const heure   = document.getElementById('input-heure').value;
   const motif   = document.getElementById('input-motif').value.trim();
 
   if (!doctor || !discord || !prenom || !date || !heure || !motif) {
-    showToast('❌ Veuillez remplir tous les champs.', 'error'); return;
+    showToast('❌ Veuillez remplir tous les champs.', 'error');
+    return;
   }
 
-  const btn = document.getElementById('btn-submit');
-  btn.disabled = true;
-  btn.textContent = '⏳ Envoi en cours...';
+  btnSubmit.disabled = true;
+  btnSubmit.textContent = '⏳ Envoi en cours…';
 
   try {
     const res = await fetch(`${API_BASE}/api/rendezvous`, {
@@ -674,7 +700,7 @@ async function submitRdv(e) {
           <div class="success-icon">✅</div>
           <h3>Rendez-vous demandé !</h3>
           <p>
-            Votre demande de rendez-vous avec <strong>${doctor.name}</strong> a bien été envoyée.<br>
+            Votre demande avec <strong>${doctor.name}</strong> a bien été envoyée.<br>
             Un ticket Discord a été créé — le médecin vous répondra directement dedans.<br><br>
             <strong>Date :</strong> ${date} à ${heure}<br>
             <strong>Motif :</strong> ${motif}
@@ -684,13 +710,13 @@ async function submitRdv(e) {
       `;
     } else {
       showToast(`❌ Erreur : ${data.error}`, 'error');
-      btn.disabled = false;
-      btn.textContent = '📅 Confirmer la demande';
+      btnSubmit.disabled = false;
+      btnSubmit.textContent = '📅 Confirmer la demande';
     }
-  } catch (err) {
+  } catch (_) {
     showToast('❌ Impossible de contacter le serveur.', 'error');
-    btn.disabled = false;
-    btn.textContent = '📅 Confirmer la demande';
+    btnSubmit.disabled = false;
+    btnSubmit.textContent = '📅 Confirmer la demande';
   }
 }
 
@@ -699,20 +725,17 @@ async function submitRdv(e) {
 // ══════════════════════════════════════════════
 function showToast(msg, type = 'success') {
   const t = document.getElementById('toast');
-  t.textContent  = msg;
-  t.className    = `show ${type}`;
+  t.textContent = msg;
+  t.className   = `show ${type}`;
   clearTimeout(t._timer);
-  t._timer = setTimeout(() => { t.className = type; }, 4000);
+  t._timer = setTimeout(() => { t.className = type; }, 4500);
 }
 
 // ══════════════════════════════════════════════
 //  INIT
 // ══════════════════════════════════════════════
 renderDoctors();
-
-// Date min = aujourd'hui
-const today = new Date().toISOString().split('T')[0];
-document.getElementById('input-date').min = today;
+document.getElementById('input-date').min = new Date().toISOString().split('T')[0];
 </script>
 </body>
 </html>
