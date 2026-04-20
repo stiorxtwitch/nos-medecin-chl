@@ -1,0 +1,718 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>CHL — Prise de Rendez-vous</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --navy:   #021a3a;
+      --blue:   #004080;
+      --accent: #0073e6;
+      --gold:   #c8a96e;
+      --light:  #f4f7fc;
+      --white:  #ffffff;
+      --grey:   #8a9bb0;
+      --border: rgba(0,64,128,.13);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--light);
+      color: var(--navy);
+      min-height: 100vh;
+    }
+
+    /* ── HEADER ── */
+    header {
+      background: var(--navy);
+      padding: 0 40px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 72px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      border-bottom: 2px solid var(--gold);
+    }
+    .logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: var(--white);
+      letter-spacing: .04em;
+    }
+    .logo span { color: var(--gold); }
+    nav { display: flex; gap: 8px; }
+    nav button {
+      background: none;
+      border: none;
+      color: rgba(255,255,255,.65);
+      font-family: 'DM Sans', sans-serif;
+      font-size: .85rem;
+      font-weight: 500;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      padding: 8px 18px;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all .2s;
+    }
+    nav button:hover, nav button.active {
+      background: rgba(255,255,255,.1);
+      color: var(--white);
+    }
+    nav button.active { color: var(--gold); }
+
+    /* ── PAGES ── */
+    .page { display: none; animation: fadeIn .35s ease; }
+    .page.active { display: block; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+    /* ── HERO ── */
+    .hero {
+      background: linear-gradient(135deg, var(--navy) 0%, #003366 60%, #005cad 100%);
+      padding: 80px 40px 70px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+      pointer-events: none;
+    }
+    .hero h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.2rem, 5vw, 3.8rem);
+      font-weight: 300;
+      color: var(--white);
+      line-height: 1.15;
+      margin-bottom: 14px;
+    }
+    .hero h1 em { font-style: italic; color: var(--gold); }
+    .hero p {
+      color: rgba(255,255,255,.7);
+      font-size: 1.05rem;
+      max-width: 520px;
+      margin: 0 auto 32px;
+      line-height: 1.7;
+    }
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(200,169,110,.15);
+      border: 1px solid rgba(200,169,110,.4);
+      color: var(--gold);
+      padding: 8px 20px;
+      border-radius: 100px;
+      font-size: .82rem;
+      font-weight: 500;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+
+    /* ── SECTION TITLE ── */
+    .section-header {
+      padding: 56px 40px 32px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .section-header h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2rem;
+      font-weight: 400;
+      color: var(--navy);
+    }
+    .section-header h2::after {
+      content: '';
+      display: block;
+      width: 48px;
+      height: 3px;
+      background: var(--gold);
+      margin-top: 10px;
+      border-radius: 2px;
+    }
+    .section-header p {
+      color: var(--grey);
+      margin-top: 10px;
+      font-size: .95rem;
+    }
+
+    /* ── DOCTORS GRID ── */
+    .doctors-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 24px;
+      padding: 0 40px 64px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .doctor-card {
+      background: var(--white);
+      border-radius: 16px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      transition: transform .25s, box-shadow .25s;
+      cursor: pointer;
+      position: relative;
+    }
+    .doctor-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 16px 40px rgba(0,64,128,.12);
+    }
+    .doctor-card-top {
+      background: linear-gradient(135deg, var(--blue), #003060);
+      padding: 32px 24px 24px;
+      text-align: center;
+      position: relative;
+    }
+    .doctor-avatar {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      background: rgba(255,255,255,.15);
+      border: 3px solid var(--gold);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 14px;
+      font-size: 2rem;
+    }
+    .doctor-card-top h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.35rem;
+      font-weight: 600;
+      color: var(--white);
+    }
+    .doctor-card-top .specialty {
+      font-size: .8rem;
+      color: var(--gold);
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      margin-top: 4px;
+      font-weight: 500;
+    }
+    .doctor-card-body {
+      padding: 20px 24px;
+    }
+    .doctor-info-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: .88rem;
+      color: var(--grey);
+      margin-bottom: 8px;
+    }
+    .doctor-info-row .icon { font-size: 1rem; }
+    .availability-badge {
+      display: inline-block;
+      margin-top: 4px;
+      padding: 3px 12px;
+      border-radius: 100px;
+      font-size: .78rem;
+      font-weight: 500;
+    }
+    .avail-yes { background: #e6f7ee; color: #1a7a45; }
+    .avail-no  { background: #fde8e8; color: #b91c1c; }
+    .btn-rdv {
+      display: block;
+      width: 100%;
+      margin-top: 16px;
+      padding: 11px;
+      background: var(--blue);
+      color: var(--white);
+      border: none;
+      border-radius: 10px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: .9rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background .2s;
+      letter-spacing: .02em;
+    }
+    .btn-rdv:hover { background: #005cad; }
+
+    /* ── PAGE RDV ── */
+    .rdv-wrapper {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 48px 40px 80px;
+    }
+    .rdv-card {
+      background: var(--white);
+      border-radius: 20px;
+      border: 1px solid var(--border);
+      padding: 40px;
+      box-shadow: 0 8px 32px rgba(0,64,128,.07);
+    }
+    .rdv-card h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.9rem;
+      font-weight: 400;
+      margin-bottom: 6px;
+    }
+    .rdv-card .subtitle {
+      color: var(--grey);
+      font-size: .9rem;
+      margin-bottom: 32px;
+    }
+
+    /* Selected doctor banner */
+    #selected-doctor-banner {
+      display: none;
+      align-items: center;
+      gap: 14px;
+      background: linear-gradient(90deg, #eef4ff, #f4f7fc);
+      border: 1px solid rgba(0,115,230,.2);
+      border-radius: 12px;
+      padding: 14px 18px;
+      margin-bottom: 28px;
+    }
+    #selected-doctor-banner.visible { display: flex; }
+    .banner-avatar {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: var(--blue);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      flex-shrink: 0;
+    }
+    .banner-info .name { font-weight: 500; font-size: .95rem; color: var(--navy); }
+    .banner-info .spec { font-size: .8rem; color: var(--grey); }
+
+    /* Form */
+    .form-group {
+      margin-bottom: 22px;
+    }
+    label {
+      display: block;
+      font-size: .82rem;
+      font-weight: 500;
+      letter-spacing: .05em;
+      text-transform: uppercase;
+      color: var(--navy);
+      margin-bottom: 8px;
+    }
+    input, select, textarea {
+      width: 100%;
+      padding: 12px 16px;
+      border: 1.5px solid var(--border);
+      border-radius: 10px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: .95rem;
+      color: var(--navy);
+      background: var(--light);
+      transition: border-color .2s, box-shadow .2s;
+      outline: none;
+    }
+    input:focus, select:focus, textarea:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(0,115,230,.1);
+      background: var(--white);
+    }
+    textarea { resize: vertical; min-height: 100px; }
+
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+
+    .btn-submit {
+      width: 100%;
+      padding: 14px;
+      background: linear-gradient(135deg, var(--blue), var(--accent));
+      color: var(--white);
+      border: none;
+      border-radius: 12px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 1rem;
+      font-weight: 500;
+      cursor: pointer;
+      margin-top: 8px;
+      transition: opacity .2s, transform .15s;
+      letter-spacing: .02em;
+    }
+    .btn-submit:hover { opacity: .92; transform: translateY(-1px); }
+    .btn-submit:disabled { opacity: .6; cursor: not-allowed; transform: none; }
+
+    /* ── TOAST ── */
+    #toast {
+      position: fixed;
+      bottom: 28px;
+      right: 28px;
+      padding: 14px 22px;
+      border-radius: 12px;
+      font-size: .9rem;
+      font-weight: 500;
+      color: var(--white);
+      box-shadow: 0 8px 24px rgba(0,0,0,.18);
+      transform: translateY(80px);
+      opacity: 0;
+      transition: all .35s cubic-bezier(.4,0,.2,1);
+      z-index: 999;
+      pointer-events: none;
+      max-width: 340px;
+    }
+    #toast.show { transform: translateY(0); opacity: 1; }
+    #toast.success { background: #1a7a45; }
+    #toast.error   { background: #b91c1c; }
+
+    /* ── SUCCESS STATE ── */
+    .success-screen {
+      text-align: center;
+      padding: 24px 0;
+    }
+    .success-icon {
+      width: 72px;
+      height: 72px;
+      background: #e6f7ee;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+      margin: 0 auto 20px;
+    }
+    .success-screen h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.8rem;
+      font-weight: 400;
+      color: var(--navy);
+      margin-bottom: 10px;
+    }
+    .success-screen p { color: var(--grey); line-height: 1.7; }
+    .btn-back {
+      display: inline-block;
+      margin-top: 24px;
+      padding: 11px 28px;
+      background: var(--navy);
+      color: var(--white);
+      border: none;
+      border-radius: 10px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: .9rem;
+      cursor: pointer;
+      transition: background .2s;
+    }
+    .btn-back:hover { background: var(--blue); }
+
+    /* ── RESPONSIVE ── */
+    @media(max-width: 600px) {
+      .doctors-grid { padding: 0 16px 48px; }
+      .section-header { padding: 40px 16px 24px; }
+      .hero { padding: 56px 20px 50px; }
+      .rdv-wrapper { padding: 32px 16px 60px; }
+      .rdv-card { padding: 24px; }
+      .form-row { grid-template-columns: 1fr; }
+      header { padding: 0 20px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <div class="logo">CHL <span>·</span> Centre Hospitalier de Liège</div>
+  <nav>
+    <button class="active" onclick="showPage('accueil', this)">🏥 Médecins</button>
+    <button onclick="showPage('rdv', this)">📅 Rendez-vous</button>
+  </nav>
+</header>
+
+<!-- ═══ PAGE ACCUEIL ═══ -->
+<div id="page-accueil" class="page active">
+  <div class="hero">
+    <div class="hero-badge">🏥 Centre Hospitalier de Liège</div>
+    <h1 style="margin-top:20px">Notre équipe <em>médicale</em><br>à votre service</h1>
+    <p>Prenez rendez-vous en ligne avec l'un de nos spécialistes.<br>Un ticket Discord vous sera créé automatiquement.</p>
+  </div>
+
+  <div class="section-header">
+    <h2>Nos médecins</h2>
+    <p>Cliquez sur un médecin pour prendre rendez-vous directement avec lui.</p>
+  </div>
+
+  <div class="doctors-grid" id="doctors-grid">
+    <!-- Généré par JS -->
+  </div>
+</div>
+
+<!-- ═══ PAGE RDV ═══ -->
+<div id="page-rdv" class="page">
+  <div class="rdv-wrapper">
+    <div class="rdv-card" id="rdv-form-container">
+      <h2>Prise de rendez-vous</h2>
+      <p class="subtitle">Remplissez le formulaire — un ticket Discord sera créé pour votre médecin.</p>
+
+      <div id="selected-doctor-banner">
+        <div class="banner-avatar" id="banner-avatar">👨‍⚕️</div>
+        <div class="banner-info">
+          <div class="name" id="banner-name">—</div>
+          <div class="spec" id="banner-spec">—</div>
+        </div>
+      </div>
+
+      <form id="rdv-form" onsubmit="submitRdv(event)">
+
+        <div class="form-group">
+          <label>Médecin concerné</label>
+          <select id="select-doctor" required onchange="updateBanner()">
+            <option value="">— Sélectionnez un médecin —</option>
+          </select>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label>Votre pseudo Discord</label>
+            <input type="text" id="input-discord" placeholder="ex: jean.dupont" required />
+          </div>
+          <div class="form-group">
+            <label>Votre prénom</label>
+            <input type="text" id="input-prenom" placeholder="ex: Jean" required />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Date souhaitée</label>
+          <input type="date" id="input-date" required />
+        </div>
+
+        <div class="form-group">
+          <label>Heure souhaitée</label>
+          <input type="time" id="input-heure" required />
+        </div>
+
+        <div class="form-group">
+          <label>Motif de la consultation</label>
+          <textarea id="input-motif" placeholder="Décrivez brièvement la raison de votre consultation..." required></textarea>
+        </div>
+
+        <button type="submit" class="btn-submit" id="btn-submit">📅 Confirmer la demande</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div id="toast"></div>
+
+<script>
+// ══════════════════════════════════════════════
+//  CONFIG — API & MÉDECINS
+// ══════════════════════════════════════════════
+const API_BASE = "https://chl-bot-gestion-7tff.onrender.com"; // ← Remplacez par votre URL Render
+
+// Liste des médecins — modifiez ici pour en ajouter / supprimer
+// discordId : l'ID Discord du médecin (pour les permissions du ticket)
+const DOCTORS = [
+  {
+    id: "doctor_1",
+    name: "Dr. Marc Lejeune",
+    specialty: "Chirurgien",
+    emoji: "👨‍⚕️",
+    disponible: true,
+    langues: "Français, Anglais",
+    experience: "12 ans",
+    discordId: "771440807919878164", // ← Remplacez par l'ID Discord réel
+  },
+  {
+    id: "doctor_2",
+    name: "Dr. Ricardo Rodriguez",
+    specialty: "Médecin Généraliste",
+    emoji: "👨‍⚕️",
+    disponible: true,
+    langues: "Français",
+    experience: "8 ans",
+    discordId: "1104345058712506368",
+  },
+  {
+    id: "doctor_3",
+    name: "Dr. Liam Moretti",
+    specialty: "Assistant-Chirurgien",
+    emoji: "👨‍⚕️",
+    disponible: true,
+    langues: "Français",
+    experience: "7 ans",
+    discordId: "1369002835609518231",
+  },
+  {
+    id: "doctor_4",
+    name: "Dr. Alexis Viatour",
+    specialty: "Médecin",
+    emoji: "👨‍⚕️",
+    disponible: false,
+    langues: "Français",
+    experience: "6 ans",
+    discordId: "795420501366669313",
+  },
+];
+
+// ══════════════════════════════════════════════
+//  NAVIGATION
+// ══════════════════════════════════════════════
+function showPage(name, btn) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('nav button').forEach(b => b.classList.remove('active'));
+  document.getElementById(`page-${name}`).classList.add('active');
+  if (btn) btn.classList.add('active');
+}
+
+// ══════════════════════════════════════════════
+//  RENDU GRILLE MÉDECINS
+// ══════════════════════════════════════════════
+function renderDoctors() {
+  const grid = document.getElementById('doctors-grid');
+  const select = document.getElementById('select-doctor');
+
+  DOCTORS.forEach(doc => {
+    // Card
+    const card = document.createElement('div');
+    card.className = 'doctor-card';
+    card.innerHTML = `
+      <div class="doctor-card-top">
+        <div class="doctor-avatar">${doc.emoji}</div>
+        <h3>${doc.name}</h3>
+        <div class="specialty">${doc.specialty}</div>
+      </div>
+      <div class="doctor-card-body">
+        <div class="doctor-info-row"><span class="icon">🌐</span> ${doc.langues}</div>
+        <div class="doctor-info-row"><span class="icon">📅</span> Expérience : ${doc.experience}</div>
+        <span class="availability-badge ${doc.disponible ? 'avail-yes' : 'avail-no'}">
+          ${doc.disponible ? '✅ Disponible' : '❌ Indisponible'}
+        </span>
+        <button class="btn-rdv" onclick="selectDoctor('${doc.id}')" ${!doc.disponible ? 'disabled style="opacity:.5;cursor:not-allowed"' : ''}>
+          📅 Prendre rendez-vous
+        </button>
+      </div>
+    `;
+    grid.appendChild(card);
+
+    // Option dans le select
+    const opt = document.createElement('option');
+    opt.value = doc.id;
+    opt.textContent = `${doc.emoji} ${doc.name} — ${doc.specialty}`;
+    opt.disabled = !doc.disponible;
+    select.appendChild(opt);
+  });
+}
+
+// ══════════════════════════════════════════════
+//  SÉLECTIONNER UN MÉDECIN + BASCULER PAGE
+// ══════════════════════════════════════════════
+function selectDoctor(id) {
+  document.getElementById('select-doctor').value = id;
+  updateBanner();
+  showPage('rdv', document.querySelectorAll('nav button')[1]);
+}
+
+function updateBanner() {
+  const id  = document.getElementById('select-doctor').value;
+  const doc = DOCTORS.find(d => d.id === id);
+  const banner = document.getElementById('selected-doctor-banner');
+  if (doc) {
+    banner.classList.add('visible');
+    document.getElementById('banner-avatar').textContent = doc.emoji;
+    document.getElementById('banner-name').textContent   = doc.name;
+    document.getElementById('banner-spec').textContent   = doc.specialty;
+  } else {
+    banner.classList.remove('visible');
+  }
+}
+
+// ══════════════════════════════════════════════
+//  SOUMISSION FORMULAIRE
+// ══════════════════════════════════════════════
+async function submitRdv(e) {
+  e.preventDefault();
+
+  const docId   = document.getElementById('select-doctor').value;
+  const doctor  = DOCTORS.find(d => d.id === docId);
+  const discord = document.getElementById('input-discord').value.trim();
+  const prenom  = document.getElementById('input-prenom').value.trim();
+  const date    = document.getElementById('input-date').value;
+  const heure   = document.getElementById('input-heure').value;
+  const motif   = document.getElementById('input-motif').value.trim();
+
+  if (!doctor || !discord || !prenom || !date || !heure || !motif) {
+    showToast('❌ Veuillez remplir tous les champs.', 'error'); return;
+  }
+
+  const btn = document.getElementById('btn-submit');
+  btn.disabled = true;
+  btn.textContent = '⏳ Envoi en cours...';
+
+  try {
+    const res = await fetch(`${API_BASE}/api/rendezvous`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        discord,
+        prenom,
+        date,
+        heure,
+        motif,
+        doctorId:        doctor.id,
+        doctorName:      doctor.name,
+        doctorSpecialty: doctor.specialty,
+        doctorDiscordId: doctor.discordId,
+      }),
+    });
+    const data = await res.json();
+
+    if (data.success) {
+      document.getElementById('rdv-form-container').innerHTML = `
+        <div class="success-screen">
+          <div class="success-icon">✅</div>
+          <h3>Rendez-vous demandé !</h3>
+          <p>
+            Votre demande de rendez-vous avec <strong>${doctor.name}</strong> a bien été envoyée.<br>
+            Un ticket Discord a été créé — le médecin vous répondra directement dedans.<br><br>
+            <strong>Date :</strong> ${date} à ${heure}<br>
+            <strong>Motif :</strong> ${motif}
+          </p>
+          <button class="btn-back" onclick="location.reload()">← Retour à l'accueil</button>
+        </div>
+      `;
+    } else {
+      showToast(`❌ Erreur : ${data.error}`, 'error');
+      btn.disabled = false;
+      btn.textContent = '📅 Confirmer la demande';
+    }
+  } catch (err) {
+    showToast('❌ Impossible de contacter le serveur.', 'error');
+    btn.disabled = false;
+    btn.textContent = '📅 Confirmer la demande';
+  }
+}
+
+// ══════════════════════════════════════════════
+//  TOAST
+// ══════════════════════════════════════════════
+function showToast(msg, type = 'success') {
+  const t = document.getElementById('toast');
+  t.textContent  = msg;
+  t.className    = `show ${type}`;
+  clearTimeout(t._timer);
+  t._timer = setTimeout(() => { t.className = type; }, 4000);
+}
+
+// ══════════════════════════════════════════════
+//  INIT
+// ══════════════════════════════════════════════
+renderDoctors();
+
+// Date min = aujourd'hui
+const today = new Date().toISOString().split('T')[0];
+document.getElementById('input-date').min = today;
+</script>
+</body>
+</html>
